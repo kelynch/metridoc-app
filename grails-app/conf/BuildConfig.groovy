@@ -6,6 +6,14 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 grails.project.war.file = "target/${appName}.war"
 
+
+grails.plugin.location."metridoc-core" = "../metridoc-grails/metridoc-grails-core"
+grails.plugin.location."metridoc-illiad" = "../metridoc-grails/metridoc-grails-illiad"
+grails.plugin.location."metridoc-funds" = "../metridoc-grails/metridoc-grails-funds"
+grails.plugin.location."metridoc-bd" = "../metridoc-grails/metridoc-grails-bd"
+grails.plugin.location."metridoc-rid" = "../metridoc-grails/metridoc-grails-rid"
+
+
 grails.project.fork = [
         // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
         //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
@@ -30,36 +38,27 @@ grails.project.dependency.resolution = {
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
-
         grailsPlugins()
         grailsHome()
         grailsCentral()
-
         if (System.getProperty("grails.env") != "production") {
             mavenLocal()
         }
-
-
         mavenCentral()
-        mavenRepo "http://dl.bintray.com/upennlib/metridoc"
+        mavenRepo ""
         mavenRepo "http://dl.bintray.com/upennlib/maven"
         mavenRepo "http://jcenter.bintray.com/"
         mavenRepo "https://metridoc.googlecode.com/svn/maven/repository"
-        //Temporarily allow production mavenLocal() because counter 0.5 is having trouble with bintray
-        //mavenLocal()
+        mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "http://repo.grails.org/grails/plugins"
     }
 
-    plugins {/*
-        println "using development dependencies"
-        String metridocVersion = new URL("https://raw.github.com/metridoc/metridoc-grails/master/VERSION").getText().trim()
-        compile ":metridoc-core:${metridocVersion}"
-        compile (":metridoc-illiad:${metridocVersion}")
-        compile (":metridoc-rid:${metridocVersion}")
-        compile (":metridoc-bd:${metridocVersion}")
-        compile (":metridoc-funds:${metridocVersion}")*/
+    plugins {
 
         if (System.getProperty("grails.env") != "production") {
             println "using development dependencies"
+
+
             String metridocVersion = new URL("https://raw.github.com/metridoc/metridoc-grails/master/VERSION").getText().trim()
             compile ":metridoc-core:${metridocVersion}"
             compile (":metridoc-illiad:${metridocVersion}")
